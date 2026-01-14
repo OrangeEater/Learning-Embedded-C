@@ -1,4 +1,4 @@
-#include <stab.h>
+#include <stdio.h>
 int main(){
     int temp;
     printf("请输入温度：(摄氏度)");
