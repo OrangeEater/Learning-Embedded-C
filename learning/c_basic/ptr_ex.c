@@ -1,7 +1,7 @@
 #include <stdio.h>
 void get_sum_and_avg(int a,int b,int *sum,float *avg){
     *sum=a+b;
-    *avg=*sum/2;
+    *avg=*sum/2.0;
 }
 
 int main(){
