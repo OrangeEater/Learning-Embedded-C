@@ -6,9 +6,9 @@ int main(){
     if(score>=90){
         printf("你很优秀！\n");
     }else if(score>60){
-        printf("还得练");
+        printf("还得练\n");
     }else{
-        printf("不及格，回家吧。");
+        printf("不及格，回家吧。\n");
     }
     return 0;
 }
