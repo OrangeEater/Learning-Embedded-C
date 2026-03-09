@@ -2,6 +2,7 @@
 #include <netinet/in.h>
 #include <iostream>
 #include <unistd.h>
+#include <cstring>
 
 int main(){
     int server_fd=socket(AF_INET,SOCK_STREAM,0);
@@ -22,6 +23,22 @@ int main(){
 
     std::cout<<"服务器已启动，正在监听8080端口。。。"<<std::endl;
     listen(server_fd,3);
+    std::cout<<"等待客户端连接。。。"<<std::endl;
+    int addrlen=sizeof(address);
+    int new_socket=accept(server_fd,(struct sockaddr *)&address,(socklen_t*)&addrlen);
+
+    if(new_socket<0){
+        perror("接听失败");
+        return -1;
+    }
+
+    std::cout<<"连接成功正在接受数据。。。"<<std::endl;
+    char buffer[1024]={0};
+    read(new_socket,buffer,1024);
+    std::cout<<"收到客户端消息："<<buffer<<std::endl;
+    const char *hello="HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello World!";
+    send(new_socket,hello,strlen(hello),0);
+    close(new_socket);
     close(server_fd);
     return 0;
 
